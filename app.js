@@ -29,12 +29,12 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 //app.use(express.compress())
-app.use(express.bodyParser());
+//app.use(express.bodyParser());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET || 'RITIKRUSTAGI',
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({
@@ -109,7 +109,7 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-var port = process.env.PORT || 80;
+var port = process.env.PORT || 3000;
 app.set("port", port);
 app.listen(port, () => {
   console.log("Server running at port " + port);
